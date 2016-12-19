@@ -6,7 +6,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Blog = require('./model/Blog');
-const Router = require('./controller/routes');
+const Router = require('./app/routes');
+const Middleware = require('./app/middlewares');
 let nunjucks = require('nunjucks');
 
 
@@ -33,7 +34,8 @@ db.once('open', function() {
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use('/', express.static(path.join(__dirname, 'public')));
-
+  
+  Middleware(app);
   Router(app);
 
   app.use(function(req, res, next) {

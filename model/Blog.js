@@ -63,7 +63,7 @@ module.exports = class Blog extends BlogModel {
 			    posts = post;
 			    resolve(posts);
 
-			}).sort(sort);
+			}).sort(findSort);
 		}).then((result) => {
 			fn(null, result);
 		}, (error) => {

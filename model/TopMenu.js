@@ -11,7 +11,7 @@ let TopMenuSchema = new Schema({
 	sort: { type: Number, default: 500 },
 });
 
-let TopMenuModel = mongoose.model('TopMenu', BlogSchema);
+let TopMenuModel = mongoose.model('TopMenu', TopMenuSchema);
 
 module.exports = class TopMenu extends TopMenuModel {
 	constructor(options) {
@@ -31,19 +31,19 @@ module.exports = class TopMenu extends TopMenuModel {
 				}
 			});
 	}	
-	static fetchAllArray(sort, fn) {
+	static fetchAllArray(fn) {
 		let menus = [];
 		let _this = this;
-		let findSort = sort ? sort : {'sort': 'asc'};
-
+		let findSort =  {'sort': 'asc'};
+		
 		new Promise(function(resolve, reject) {
 		  _this.find( (err, menus) => {
 			    if (err) return console.error(err);
 			    
 			    resolve(menus);
-			}).sort(sort);
+			});
 		}).then((result) => {
-			fn(null, result);
+			fn(result);
 		}, (error) => {
 			console.log(error);
 		});

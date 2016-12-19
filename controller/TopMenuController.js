@@ -4,9 +4,12 @@ const TopMenu = require('../model/TopMenu');
 
 module.exports = class TopMenuController {
 	constructor() {}
-	addDataToPage(res, next) {
+	static addDataToPage(res, next) {
 		TopMenu.fetchAllArray(function(menus) {
-			res.pageData.TopMenu = menus;
+			if(!!menus.length) {
+				res.pageData.TopMenu = menus;
+			}
+
 			next();
 		});
 	}
