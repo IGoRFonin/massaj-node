@@ -1,0 +1,20 @@
+'use strict';
+let express = require('express');
+let router = express.Router();
+let fs = require('fs')
+let path = require('path');
+/* GET home page. */
+router.get('/:id', function(req, res, next) {
+	let file = global.rootPath + path.sep
+	   + 'static-pages' + path.sep
+	   + req.params.id + '.json';
+	   
+  if(fs.existsSync(file)) {
+  	res.render('pages/' + req.params.id, require(file));
+  } else {
+  	next();	
+  }
+  
+});
+
+module.exports = router;
