@@ -41,7 +41,7 @@ module.exports = class TopMenu extends TopMenuModel {
 			    if (err) return console.error(err);
 			    
 			    resolve(menus);
-			});
+			}).sort(findSort);
 		}).then((result) => {
 			fn(result);
 		}, (error) => {

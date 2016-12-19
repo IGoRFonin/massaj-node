@@ -46,14 +46,20 @@
                 <a class="navbar-brand" href="index.html"><img src="/img/logo.png" alt="logo"/></a>
             </div>
             <div class="navbar-collapse collapse ">
+            {% if TopMenu.length %}
                 <ul class="nav navbar-nav" id="top-menu">
-                    <li><a href="/">Главная</a></li>
-                    <li><a href="/blog">Блог</a></li>
-                    <li><a href="/about">О нас</a></li>
-                    <li><a href="/service">Услуги</a></li>
-                    <li><a href="/price">Цены</a></li>
-                    <li><a href="/contacts">Контакты</a></li> 
+                    {% for menu in TopMenu %}
+                        <li 
+                            {% if menu.selected %}
+                            class="active"
+                            {% endif %}>
+                                <a href="{{ menu.link }}">
+                                    {{ menu.name }}
+                                </a>
+                            </li>
+                    {% endfor %}
                 </ul>
+            {% endif %}
             </div>
         </div>
     </div>
