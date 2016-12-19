@@ -5,7 +5,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Blog = require('./model/Blog');
+const TopMenu = require('./model/TopMenu');
 const Router = require('./app/routes');
 const Middleware = require('./app/middlewares');
 let nunjucks = require('nunjucks');
@@ -17,11 +17,12 @@ let app = express();
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  let post = new Blog({
-    'name': 'Нерзул', 
-    'body': 'Этот загадочный орк-шаман так и не дал понять, жив он или нет, но про него уже давно слагают легенды',
-    'sort': 95})
-  // post.insert();
+  let menu = new TopMenu({
+    'name': 'Контакты', 
+    'link': '/contacts',
+    'active': true,
+    'sort': 60 })
+  // menu.insert();
   // Blog._removeAll();
   // view engine setup
   nunjucks.configure('views', {
