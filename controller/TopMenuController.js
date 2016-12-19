@@ -8,7 +8,12 @@ module.exports = class TopMenuController {
 		TopMenu.fetchAllArray(function(menus) {
 			if(!!menus.length) {
 				for(let menu in menus) {
-					if(res.req.url.search(menus[menu].link) + 1) {
+						console.log(menus[menu].link);
+					if(menus[menu].link == "/" && res.req.url == "/") {
+						menus[menu].selected = true;
+					} else
+					if(res.req.url.search(menus[menu].link) + 1 
+						&& menus[menu].link != "/") {
 						menus[menu].selected = true;
 					}
 				}

@@ -25,7 +25,7 @@ module.exports = class View {
 		if(this.res.pageData != undefined) {
 			data = this.collect(data, this.res.pageData);	
 		}
-		console.log(this.res.pageData.TopMenu);
+		
 		this.res.render(this.template, data);
 	}
 }
