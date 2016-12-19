@@ -1,9 +1,14 @@
-var express = require('express');
+'use strict';
+
+const express = require('express');
+const ViewController = require('../controller/ViewController');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('pages/index', { title: 'Express' });
+	let view = new ViewController('pages/index', res);
+
+  view.render();
 });
 
 module.exports = router;

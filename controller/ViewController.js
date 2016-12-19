@@ -20,6 +20,8 @@ module.exports = class View {
 		}
 	}
 	render(data) {
+		data = data ? data : {};
+		
 		if(this.res.pageData != undefined) {
 			data = this.collect(data, this.res.pageData);	
 		}
