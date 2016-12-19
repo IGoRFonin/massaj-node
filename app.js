@@ -6,13 +6,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Blog = require('./model/Blog');
+const Router = require('./controller/routes');
 let nunjucks = require('nunjucks');
 
-let route = {
-	index: require('./routes/index'),
-	staticPages: require('./routes/static-pages'),
-  blog: require('./routes/blog')
-}
 
 mongoose.connect('mongodb://localhost:27017/massaj');
 var db = mongoose.connection;
@@ -35,17 +31,10 @@ db.once('open', function() {
 
   app.set('view engine', 'njk');
 
-
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use('/', express.static(path.join(__dirname, 'public')));
 
-  let router = express.Router();
-
-  router.get('/:id', route.staticPages);
-  app.use(router);
-
-  app.use('/blog', route.blog);
-  app.use('/', route.index);
+  Router(app);
 
   app.use(function(req, res, next) {
     var err = new Error('Not Found');
